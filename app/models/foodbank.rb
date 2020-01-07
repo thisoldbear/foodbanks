@@ -7,6 +7,7 @@ class Foodbank < ApplicationRecord
 
   def geocode
     # get lat and lng columns from address here
+    # https://developer.mapquest.com/documentation/geocoding-api/
   end
 
 end
