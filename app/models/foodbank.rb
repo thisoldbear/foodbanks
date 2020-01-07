@@ -1,5 +1,6 @@
 class Foodbank < ApplicationRecord
-  has_and_belongs_to_many :food_items
+  has_many :shopping_list_items
+  has_many :foods, through: :shopping_list_items
 
   before_save :geocode
   # Include default devise modules. Others available are:
