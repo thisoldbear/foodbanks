@@ -10,6 +10,18 @@
   </head>
 
   <body>
+
+    <%= link_to "Home", root_path %>
+    <% if foodbank_signed_in? %>
+      <%= link_to "Foodbank dashboard" %>
+      <%= link_to "Sign out", destroy_foodbank_session_path, method: :delete %>
+    <% else %>
+      <%= link_to "Sign in", new_foodbank_session_path %>
+      <%= link_to "Register", new_foodbank_registration_path %>
+    <% end %>
+
+    <hr/>
+
     <%= yield %>
   </body>
 </html>

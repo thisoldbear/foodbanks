@@ -1,0 +1,2 @@
+module FoodbanksHelper
+end

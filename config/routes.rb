@@ -1,4 +1,11 @@
 Rails.application.routes.draw do
+
+  root to: "foodbank#search"
+
   devise_for :foodbanks
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+
+  # namespace :foodbanks do
+  #   root to: "foodbank#dashboard"
+  # end
+
 end
