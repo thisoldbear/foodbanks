@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_07_175316) do
+ActiveRecord::Schema.define(version: 2020_01_07_175353) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,6 +37,13 @@ ActiveRecord::Schema.define(version: 2020_01_07_175316) do
     t.boolean "approved"
     t.index ["email"], name: "index_foodbanks_on_email", unique: true
     t.index ["reset_password_token"], name: "index_foodbanks_on_reset_password_token", unique: true
+  end
+
+  create_table "foodbanks_food_items", id: false, force: :cascade do |t|
+    t.bigint "foodbanks_id"
+    t.bigint "food_items_id"
+    t.index ["food_items_id"], name: "index_foodbanks_food_items_on_food_items_id"
+    t.index ["foodbanks_id"], name: "index_foodbanks_food_items_on_foodbanks_id"
   end
 
 end
