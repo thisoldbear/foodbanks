@@ -1,5 +1,22 @@
 <h1>Dashboard view</h1>
 
-HIDDEN
-
 <%= @foodbank.email %>
+
+
+<h2>Derp</h2>
+<ul style="padding: 10px; background: #fafafa;" id="list-1-foods" class="connected" data-url="<%= %>">
+    <% @foodbank.shopping_list_items.each do |f| %>
+        <li>
+            <%= f.food.name %>
+        </li>
+    <% end %>
+</ul>
+
+<h2>Unsorted</h2>
+<ul style="padding: 10px; background: #fafafa;" id="unsorted-foods" class="connected" data-url="<%= %>">
+    <% @foods.each do |f| %>
+        <li>
+            <%= f.name %>
+        </li>
+    <% end %>
+</ul>

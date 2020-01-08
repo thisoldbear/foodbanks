@@ -3,6 +3,7 @@ class User::UserController < ApplicationController
 
     def index
         @foodbank = current_user
+        @foods = Food.all
     end
 
 end
