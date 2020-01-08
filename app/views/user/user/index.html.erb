@@ -3,8 +3,8 @@
 <%= @foodbank.email %>
 
 
-<h2>Derp</h2>
-<ul style="padding: 10px; background: #fafafa;" id="list-1-foods" class="connected" data-url="<%= %>">
+<h2>Needed</h2>
+<ul style="padding: 10px; background: #fafafa;" id="needed" class="connected" data-url="<%= %>">
     <% @foodbank.shopping_list_items.each do |f| %>
         <li>
             <%= f.food.name %>
@@ -13,7 +13,7 @@
 </ul>
 
 <h2>Unsorted</h2>
-<ul style="padding: 10px; background: #fafafa;" id="unsorted-foods" class="connected" data-url="<%= %>">
+<ul style="padding: 10px; background: #fafafa;" id="unsorted" class="connected" data-url="<%= %>">
     <% @foods.each do |f| %>
         <li>
             <%= f.name %>

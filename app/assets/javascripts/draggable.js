@@ -1,6 +1,6 @@
 document.addEventListener("turbolinks:load", () => {
 
-    $("#list-1-foods, #unsorted-foods").sortable({
+    $("#needed, #unsorted").sortable({
         connectWith: ".connected"
     })
 
