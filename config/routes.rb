@@ -1,11 +1,11 @@
 Rails.application.routes.draw do
 
-  root to: "foodbank#search"
+  root "public#index"
 
   devise_for :foodbanks
 
-  # namespace :foodbanks do
-  #   root to: "foodbank#dashboard"
-  # end
+  namespace :foodbank do
+    root to: "foodbank#index"
+  end
 
 end
