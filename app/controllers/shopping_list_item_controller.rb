@@ -3,9 +3,22 @@ class ShoppingListItemController < ApplicationController
 
         # byebug
 
-        respond_to do |format|
-            format.json { render json: params }
-        end 
+        unless params["priority"] === "unsorted"
+            params["items"].each_with_index do |item, index|
+
+                # byebug
+
+                ShoppingListItem.find_or_initialize_by({
+                    user_id: current_user.id,
+                    food_id: Integer(item)
+                }).tap do | r |
+                    r.priority = params["priority"]
+                    r.position = index
+                    r.save
+                end
+            end
+        end
+
 
         # 1. parse the list name, and delete all records that match:
         #   - the priority
