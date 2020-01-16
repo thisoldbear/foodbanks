@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  after_save :geocode
+
   has_many :shopping_list_items
   has_many :foods, through: :shopping_list_items
 
@@ -9,8 +11,13 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   def geocode
-    # get lat and lng columns from address here
     # https://developer.mapquest.com/documentation/geocoding-api/
+    res = HTTParty.get("http://www.mapquestapi.com/geocoding/v1/address?key=#{Rails.application.credentials.mapquest_key}&location=#{self.address}")
+    data = JSON.parse(res.body)
+    lat_lng = data["results"][0]["locations"][0]["latLng"]
+    self.lat = lat_lng["lat"]
+    self.lng = lat_lng["lng"]
   end
 
 end
+
