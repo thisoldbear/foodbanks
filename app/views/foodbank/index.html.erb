@@ -2,5 +2,10 @@
 
 Enter your postcode...
 
+<%= form_with url: search_foodbank_index_path do |form| %>
+  <%= form.text_field :postcode %>
+<% end %>
+
+
 
 Are you a food bank? <%= link_to "Register here", new_user_registration_path %>
