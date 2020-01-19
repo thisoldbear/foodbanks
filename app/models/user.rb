@@ -10,7 +10,7 @@ class User < ApplicationRecord
   after_validation :geocode 
 
   def address
-      [street_address, postcode].compact.join(', ')
+      [street_address, city, postcode].compact.join(', ')
   end
 
   def urgent
