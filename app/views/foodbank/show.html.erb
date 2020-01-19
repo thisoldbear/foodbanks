@@ -1,0 +1,33 @@
+<h1><%= @foodbank.name %></h1>
+<p><%= @foodbank.address %></p>
+
+<%= link_to "Change", clear_foodbank_index_path, method: :delete %>
+
+
+<h2>Urgently needed</h2>
+<ul>
+    <% @foodbank.urgent.each do |s| %>
+        <li id="<%= s.food.id %>">
+            <%= s.food.name %>
+        </li>
+    <% end %>
+</ul>
+
+<h2>Also needed</h2>
+<ul>
+    <% @foodbank.needed.each do |s| %>
+        <li id="<%= s.food.id %>">
+            <%= s.food.name %>
+        </li>
+    <% end %>
+</ul>
+
+<h2>Not accepted right now</h2>
+<p>We may still need these later</p>
+<ul>
+    <% @foodbank.unsorted.each do |f| %>
+        <li id="<%= f.id %>" >
+            <%= f.name %>
+        </li>
+    <% end %>
+</ul>

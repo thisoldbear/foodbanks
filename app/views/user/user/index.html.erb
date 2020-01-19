@@ -6,7 +6,7 @@
 
 <h2>Urgent</h2>
 <ul style="padding: 10px; background: #fafafa;" id="urgent" class="connected" data-url="<%= sort_shopping_list_item_index_path %>">
-    <% @urgent.each do |s| %>
+    <% @foodbank.urgent.each do |s| %>
         <li id="<%= s.food.id %>" tabindex="0">
             <%= s.food.name %>
         </li>
@@ -15,7 +15,7 @@
 
 <h2>Needed</h2>
 <ul style="padding: 10px; background: #fafafa;" id="needed" class="connected" data-url="<%= sort_shopping_list_item_index_path %>">
-    <% @needed.each do |s| %>
+    <% @foodbank.needed.each do |s| %>
         <li id="<%= s.food.id %>">
             <%= s.food.name %>
         </li>
@@ -24,7 +24,7 @@
 
 <h2>Unsorted</h2>
 <ul style="padding: 10px; background: #fafafa;" id="unsorted" class="connected" data-url="<%= sort_shopping_list_item_index_path %>">
-    <% @unsorted_foods.each do |f| %>
+    <% @foodbank.unsorted.each do |f| %>
         <li id="<%= f.id %>" >
             <%= f.name %>
         </li>

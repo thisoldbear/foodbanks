@@ -2,22 +2,23 @@ class User < ApplicationRecord
   has_many :shopping_list_items
   has_many :foods, through: :shopping_list_items
 
-  # before_save :geocode
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  # acts_as_mappable
+  geocoded_by :address,
+    :latitude => :lat, :longitude => :lng
+  after_validation :geocode 
 
-  # def geocode
-  #   # https://developer.mapquest.com/documentation/geocoding-api/
-  #   res = HTTParty.get("http://www.mapquestapi.com/geocoding/v1/address?key=#{Rails.application.credentials.mapquest_key}&location=#{self.address}")
-  #   data = JSON.parse(res.body)
-  #   lat_lng = data["results"][0]["locations"][0]["latLng"]
-  #   self.lat = lat_lng["lat"]
-  #   self.lng = lat_lng["lng"]
-  # end
+  def urgent
+    self.shopping_list_items.where(priority: "urgent").order(position: :asc)
+  end
+
+  def needed
+    self.shopping_list_items.where(priority: "needed").order(position: :asc)
+  end
+
+  def unsorted
+    Food.where.not(id: self.shopping_list_items.pluck(:food_id))
+  end
 
 end
-

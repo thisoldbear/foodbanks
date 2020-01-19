@@ -2,7 +2,22 @@
 
 Enter your postcode...
 
-<%= form_with url: search_foodbank_index_path do |form| %>
+<%= cookies[:foodbank].to_yaml %>
+
+<% if @results %>
+  <ul>
+    <% @results.each do |r| %>
+      <li>
+        <%= link_to r.email, foodbank_path(r) %>
+        <%= r.address %>
+        <%= r.lat %>
+        <%= r.lng %>
+      </li>
+    <% end %>
+  </ul>
+<% end %>
+
+<%= form_with url: root_path, method: :get, local: true do |form| %>
   <%= form.text_field :postcode %>
 <% end %>
 

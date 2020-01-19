@@ -10,7 +10,7 @@ Rails.application.routes.draw do
 
   resources :foodbank, only: ["index", "show"] do
     collection do
-      post "search"
+      delete "clear"
     end
   end
 
