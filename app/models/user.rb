@@ -9,6 +9,10 @@ class User < ApplicationRecord
     :latitude => :lat, :longitude => :lng
   after_validation :geocode 
 
+  def address
+      [street_address, postcode].compact.join(', ')
+  end
+
   def urgent
     self.shopping_list_items.where(priority: "urgent").order(position: :asc)
   end
