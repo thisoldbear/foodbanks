@@ -1,8 +1,12 @@
 <h1>Home page</h1>
 
-Enter your postcode...
-
-<%= cookies[:foodbank].to_yaml %>
+<h2>
+  <% if @results %>
+    Choose a foodbank
+  <% else %>
+    Where are you?
+  <% end %>
+</h2>
 
 <% if @results %>
   <ul>
@@ -17,10 +21,15 @@ Enter your postcode...
   </ul>
 <% end %>
 
-<%= form_with url: root_path, method: :get, local: true do |form| %>
-  <%= form.text_field :postcode %>
+<%= form_with url: root_path, method: :get, local: true do |f| %>
+  <%= f.label :postcode %>
+  <%= f.text_field :postcode, value: params[:postcode], required: :true %>
+  <%= f.submit "See nearest foodbanks" %>
 <% end %>
 
+<%= form_with url: root_path, method: :get, local: true do |f| %>
+  <%= f.hidden_field :coordinates, value: params[:coordinates], id: "coordinates" %>
+  <button onclick="getCurrentLocation(event)">Use current location</button>
+<% end %>
 
-
-Are you a food bank? <%= link_to "Register here", new_user_registration_path %>
+Are you a food bank? <%= link_to "Register for free", new_user_registration_path %>

@@ -5,6 +5,8 @@
 
 <%= link_to "Get directions", "https://www.google.com/maps/search/#{@foodbank.address}" %>
 
+<small>Last updated <%= time_ago_in_words(@foodbank.updated_at) %> ago</small>
+
 <h2>Urgently needed</h2>
 <ul>
     <% @foodbank.urgent.each do |s| %>

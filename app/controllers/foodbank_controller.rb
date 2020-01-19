@@ -6,10 +6,10 @@ class FoodbankController < ApplicationController
         if params[:postcode].present?
             @results = User.near(params[:postcode], 20000).limit(3)
         end
-        respond_to do |format|
-            format.html
-            format.js 
+        if params[:coordinates].present?
+            @results = User.near(params[:coordinates], 20000).limit(3)
         end
+
     end
 
     def show
