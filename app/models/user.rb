@@ -9,6 +9,8 @@ class User < ApplicationRecord
     :latitude => :lat, :longitude => :lng
   after_validation :geocode 
 
+  attr_accessor :current_password
+
   def address
       [street_address, city, postcode].compact.join(', ')
   end
