@@ -12,7 +12,10 @@ class User < ApplicationRecord
   attr_accessor :current_password
 
   def address
-      [street_address, city, postcode].compact.join(', ')
+    [street_address, city, postcode, "UK"].compact.join(', ')
+    # frig = [street_address, city, postcode].compact.join(', ')
+    # fuck = Geocoder.search(frig)
+    # byebug
   end
 
   def urgent
@@ -25,6 +28,16 @@ class User < ApplicationRecord
 
   def unsorted
     Food.where.not(id: self.shopping_list_items.pluck(:food_id))
+  end
+
+  def rough_distance
+    if distance < 1
+      "Less than a mile away"
+    elsif (1 < distance) && (distance < 2)
+      "About a mile away"
+    else
+      "About #{distance.round} miles away"
+    end
   end
 
 end

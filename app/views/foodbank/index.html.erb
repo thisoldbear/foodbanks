@@ -12,10 +12,8 @@
   <ul>
     <% @results.each do |r| %>
       <li>
-        <%= link_to r.email, foodbank_path(r) %>
-        <%= r.address %>
-        <%= r.lat %>
-        <%= r.lng %>
+        <%= link_to r.name, foodbank_path(r) %>
+        <%= r.rough_distance %>
       </li>
     <% end %>
   </ul>
@@ -28,7 +26,8 @@
 <% end %>
 
 <%= form_with url: root_path, method: :get, local: true do |f| %>
-  <%= f.hidden_field :coordinates, value: params[:coordinates], id: "coordinates" %>
+  <%= f.hidden_field :lat, value: params[:lat], id: "lat" %>
+  <%= f.hidden_field :lng, value: params[:lng], id: "lng" %>
   <button onclick="getCurrentLocation(event)">Use current location</button>
 <% end %>
 

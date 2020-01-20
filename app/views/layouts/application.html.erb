@@ -12,6 +12,7 @@
   <body>
 
     <%= link_to "Home", root_path %>
+          <%= link_to "About the project", "https://tory-toolkit.github.io/" %>
     <% if user_signed_in? %>
       <%= link_to "Foodbank dashboard", user_root_path %>
       <%= link_to "Sign out", destroy_user_session_path, method: :delete %>
