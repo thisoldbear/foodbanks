@@ -20,7 +20,7 @@
 <% end %>
 
 <%= form_with url: root_path, method: :get, local: true do |f| %>
-  <%= f.label :postcode %>
+  <%= f.label :postcode, "Enter a town or city" %>
   <%= f.text_field :postcode, value: params[:postcode], required: :true %>
   <%= f.submit "See nearest foodbanks" %>
 <% end %>
