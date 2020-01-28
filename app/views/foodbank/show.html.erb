@@ -1,36 +1,52 @@
-<h1><%= @foodbank.name %></h1>
-<p><%= @foodbank.address %></p>
-
-<%= link_to "Change", clear_foodbank_index_path, method: :delete %>
-
-<%= link_to "Get directions", "https://www.google.com/maps/search/#{@foodbank.address}" %>
-
-<small>Last updated <%= time_ago_in_words(@foodbank.updated_at) %> ago</small>
-
-<h2>Urgently needed</h2>
-<ul>
-    <% @foodbank.urgent.each do |s| %>
-        <li id="<%= s.food.id %>">
-            <%= s.food.name %>
-        </li>
-    <% end %>
-</ul>
-
-<h2>Also needed</h2>
-<ul>
-    <% @foodbank.needed.each do |s| %>
-        <li id="<%= s.food.id %>">
-            <%= s.food.name %>
-        </li>
-    <% end %>
-</ul>
-
-<h2>Not accepted right now</h2>
-<p>We may still need these later</p>
-<ul>
-    <% @foodbank.unsorted.each do |f| %>
-        <li id="<%= f.id %>" >
-            <%= f.name %>
-        </li>
-    <% end %>
-</ul>
+<div class="hero">
+    <div class="hero__inner">
+        <h1 class="hero__heading"><%= @foodbank.name || "Foodbank Name" %></h1>
+        <p class="hero__sub-heading"><%= @foodbank.address %></p>
+        <%= link_to "Change", clear_foodbank_index_path, method: :delete, class: "hero__link inline-link" %>
+        <%= link_to "Get directions", "https://www.google.com/maps/search/#{@foodbank.address}", class: "hero__link inline-link" %>
+        <small>Last updated <%= time_ago_in_words(@foodbank.updated_at) %> ago</small>
+    </div>
+</div>
+<div class="wrapper wrapper--bg">
+    <div class="wrapper__inner">
+        <div class="grid sort-parent">
+            <div class="grid__column">
+                <div class="rounded-box">
+                <h2 class="list-heading list-heading">Urgent</h2>
+                    <ul class="list">
+                        <% @foodbank.urgent.each do |s| %>
+                            <li class="list__item" id="<%= s.food.id %>">
+                                <%= s.food.name %>
+                            </li>
+                        <% end %>
+                    </ul>
+                </div>
+            </div>
+            <div class="grid__column">
+                <div class="rounded-box">
+                <h2 class="list-heading list-heading">Also needed</h2>
+                    <ul class="list">
+                        <% @foodbank.needed.each do |s| %>
+                            <li class="list__item" id="<%= s.food.id %>">
+                                <%= s.food.name %>
+                            </li>
+                        <% end %>
+                    </ul>
+                </div>
+            </div>
+            <div class="grid__column">
+                <div class="rounded-box">
+                    <h2 class="list-heading list-heading">Not accepted right now</h2>
+                    <p class="list-sub-heading">We may still need these later</p>
+                    <ul class="list">
+                        <% @foodbank.unsorted.each do |f| %>
+                            <li class="list__item list__item--unsorted" id="<%= f.id %>" >
+                                <%= f.name %>
+                            </li>
+                        <% end %>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
