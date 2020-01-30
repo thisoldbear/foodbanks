@@ -1,34 +1,53 @@
-<h1>Home page</h1>
+<div class="home">
+  <div class="home__hero">
+    <h1 class="home__hero-heading">Foodbank</h1>
+    <p class="home__hero-sub-heading">See what your local foodbank needs, when they need it</p>
+  </div>
+  <div class="home__form rounded-box">
+    <h2 class="section-heading">
+      <% if @results %>
+        Choose a foodbank
+      <% else %>
+        Where are you?
+      <% end %>
+    </h2>
 
-<h2>
-  <% if @results %>
-    Choose a foodbank
-  <% else %>
-    Where are you?
-  <% end %>
-</h2>
-
-<% if @results %>
-  <ul>
-    <% @results.each do |r| %>
-      <li>
-        <%= link_to r.name, foodbank_path(r) %>
-        <%= r.rough_distance %>
-      </li>
+    <% if @results %>
+      <ul class="results-list">
+        <% @results.each do |r| %>
+          <li class="results-list__item">
+            <%= link_to foodbank_path(r), class: "results-list__item-link" do %>
+              <span  class="results-list__item-name"><%= r.name || "Foodbank Name" %></span>
+              <span class="results-list__item-distance"><%= r.rough_distance %></span>
+              <svg class="results-list__item-icon" aria-hidden="true" width="14" height="22" viewBox="0 0 14 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path opacity="0.25" d="M2 2L11 11L2 20" stroke="#87809F" stroke-width="3"/>
+              </svg>
+            <% end %>
+          </li>
+        <% end %>
+      </ul>
     <% end %>
-  </ul>
-<% end %>
 
-<%= form_with url: root_path, method: :get, local: true do |f| %>
-  <%= f.label :postcode, "Enter a town or city" %>
-  <%= f.text_field :postcode, value: params[:postcode], required: :true %>
-  <%= f.submit "See nearest foodbanks" %>
-<% end %>
+    <div class="home__form">
+      <%= form_with url: root_path, method: :get, local: true do |f| %>
+        <div class="form-field">
+          <%= f.label :postcode, "Enter a town or city", class: "form-label" %>
+          <%= f.text_field :postcode, value: params[:postcode], required: :true, class: "form-input" %>
+        </div>
+        <%= f.submit "See nearest foodbanks", :class => "btn btn--cta" %>
+      <% end %>
+    </div>
 
-<%= form_with url: root_path, method: :get, local: true do |f| %>
-  <%= f.hidden_field :lat, value: params[:lat], id: "lat" %>
-  <%= f.hidden_field :lng, value: params[:lng], id: "lng" %>
-  <button onclick="getCurrentLocation(event)">Use current location</button>
-<% end %>
-
-Are you a food bank? <%= link_to "Register for free", new_user_registration_path %>
+    <div class="home__geo">
+      <%= form_with url: root_path, method: :get, local: true do |f| %>
+        <%= f.hidden_field :lat, value: params[:lat], id: "lat" %>
+        <%= f.hidden_field :lng, value: params[:lng], id: "lng" %>
+        <button class="btn" onclick="getCurrentLocation(event)">Use current location</button>
+      <% end %>
+    </div>
+  </div>
+  <div class="home__register">
+    <p>Are you a food bank?</p>
+    <p><%= link_to "Register for free", new_user_registration_path %></p>
+  </div>
+</div>

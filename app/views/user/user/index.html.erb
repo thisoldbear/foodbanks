@@ -1,31 +1,55 @@
-<h1>Your shopping list</h1>
-<p><%= current_user.name %></p>
-
-<%= link_to "Edit profile", edit_user_registration_path %>
-
-<h2>Urgent</h2>
-<ul style="padding: 10px; background: #fafafa;" id="urgent" class="connected" data-url="<%= sort_shopping_list_item_index_path %>">
-    <% current_user.urgent.each do |s| %>
-        <li id="<%= s.food.id %>" tabindex="0">
-            <%= s.food.name %>
-        </li>
-    <% end %>
-</ul>
-
-<h2>Needed</h2>
-<ul style="padding: 10px; background: #fafafa;" id="needed" class="connected" data-url="<%= sort_shopping_list_item_index_path %>">
-    <% current_user.needed.each do |s| %>
-        <li id="<%= s.food.id %>">
-            <%= s.food.name %>
-        </li>
-    <% end %>
-</ul>
-
-<h2>Unsorted</h2>
-<ul style="padding: 10px; background: #fafafa;" id="unsorted" class="connected" data-url="<%= sort_shopping_list_item_index_path %>">
-    <% current_user.unsorted.each do |f| %>
-        <li id="<%= f.id %>" >
-            <%= f.name %>
-        </li>
-    <% end %>
-</ul>
+<div class="hero">
+    <div class="hero__inner">
+        <h1 class="hero__heading">Your shopping list</h1>
+        <p class="hero__sub-heading"><%= current_user.name %></p>
+        <%= link_to "Edit profile", edit_user_registration_path, class: "hero__link inline-link" %>
+    </div>
+</div>
+<div class="wrapper wrapper--bg">
+    <div class="wrapper__inner">
+        <div class="grid sort-parent">
+            <div class="grid__column">
+                <div class="rounded-box">
+                    <div class="sort">
+                        <h2 class="list-heading list-heading--urgent">Urgent</h2>
+                        <ul class="sort__list connected" id="urgent" data-url="<%= sort_shopping_list_item_index_path %>">
+                            <% current_user.urgent.each do |s| %>
+                                <li class="sort__list-item" id="<%= s.food.id %>" tabindex="0">
+                                    <%= s.food.name %>
+                                </li>
+                            <% end %>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="grid__column">
+                <div class="rounded-box">
+                    <div class="sort">
+                        <h2 class="list-heading list-heading--needed">Needed</h2>
+                        <ul class="sort__list connected" id="needed" data-url="<%= sort_shopping_list_item_index_path %>">
+                            <% current_user.needed.each do |s| %>
+                                <li class="sort__list-item" id="<%= s.food.id %>">
+                                    <%= s.food.name %>
+                                </li>
+                            <% end %>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="grid__column">
+                <div class="rounded-box">
+                    <div class="sort">
+                        <h2 class="list-heading list-heading--unsorted">Unsorted</h2>
+                        <ul class="sort__list connected" id="unsorted" data-url="<%= sort_shopping_list_item_index_path %>">
+                            <% current_user.unsorted.each do |f| %>
+                                <li class="sort__list-item" id="<%= f.id %>" >
+                                    <%= f.name %>
+                                </li>
+                            <% end %>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

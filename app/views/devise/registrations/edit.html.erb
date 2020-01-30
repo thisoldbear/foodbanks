@@ -1,79 +1,91 @@
-<h1>Edit foodbank profile</h1>
-<p><%= current_user.name %></p>
+<div class="hero">
+    <div class="hero__inner">
+        <h1 class="hero__heading">Edit foodbank profile</h1>
+        <p class="hero__sub-heading"><%= current_user.name %></p>
+    </div>
+</div>
+<div class="wrapper wrapper--bg">
+  <div class="wrapper__inner">
+    <div class="grid sort-parent">
+      <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, class: "grid__column form" }) do |f| %>
+        <div class="rounded-box">
+          <h2 class="form__heading">Public details</h2>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
+          <%= render "devise/shared/error_messages", resource: resource %>
 
-  <h2>Public details</h2>
+          <div class="form-field">
+            <%= f.label :name, class: "form-label" %>
+            <%= f.text_field :name, class: "form-input" %>
+          </div>
 
-  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
+          <div class="form-field">
+            <%= f.label :parent_organisation, class: "form-label" %>
+            <%= f.text_field :parent_organisation, class: "form-input" %>
+          </div>
+
+          <h3 class="form__sub-heading">Main donation point</h3>
+
+          <div class="form-field">
+            <%= f.label :street_address, class: "form-label" %>
+            <%= f.text_field :street_address, class: "form-input" %>
+          </div>
+
+          <div class="form-field">
+            <%= f.label :city, class: "form-label" %>
+            <%= f.text_field :city, class: "form-input" %>
+          </div>
+
+          <div class="form-field">
+            <%= f.label :postcode, class: "form-label" %>
+            <%= f.text_field :postcode, class: "form-input" %>
+          </div>
+
+          <%= f.submit "Update", :class => "btn" %>
+        </div>
+        <div class="rounded-box">
+          <h2 class="form__heading">Account details</h2>
+
+          <div class="form-field">
+            <%= f.label :email, class: "form-label" %>
+            <%= f.email_field :email, autocomplete: "email", class: "form-input" %>
+          </div>
+
+          <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+            <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+          <% end %>
+
+          <div class="form-field">
+            <%= f.label :password, class: "form-label" %>
+            <span class="form-help"><i>(leave blank if you don't want to change it)</i></span>
+            <%= f.password_field :password, autocomplete: "new-password", class: "form-input" %>
+            <% if @minimum_password_length %>
+              <span class="form-help"><em><%= @minimum_password_length %> characters minimum</em></span>
+            <% end %>
+          </div>
+
+          <div class="form-field">
+            <%= f.label :password_confirmation, class: "form-label" %>
+            <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-input" %>
+          </div>
+
+          <div class="form-field">
+            <%= f.label :current_password, class: "form-label" %>
+            <span class="form-help"><i>(we need your current password to confirm your changes)</i></span>
+            <%= f.password_field :current_password, autocomplete: "current-password", class: "form-input" %>
+          </div>
+
+          <%= f.submit "Update", :class => "btn" %>
+        </div>
+      <% end %>
+      <div class="grid__column">
+        <div class="rounded-box">
+          <h2 class="form__heading">Remove foodbank</h2>
+          <p>You can clear your account from the app. Users will no longer see you in results.</p>
+          <div class="form-actions">
+            <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, class: "btn btn--alt", method: :delete %>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-
-    <div class="field">
-    <%= f.label :parent_organisation %><br />
-    <%= f.text_field :parent_organisation %>
-  </div>
-
-  <h3>Main donation point</h3>
-
-  <div class="field">
-    <%= f.label :street_address %><br />
-    <%= f.text_field :street_address %>
-  </div>
-
-  <div class="field">
-    <%= f.label :city %><br />
-    <%= f.text_field :city %>
-  </div>
-
-  <div class="field">
-    <%= f.label :postcode %><br />
-    <%= f.text_field :postcode %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Update" %>
-  </div>
-
-<h2>Account details</h2>
-
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autocomplete: "email" %>
-  </div>
-
-  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-    <% if @minimum_password_length %>
-      <br />
-      <em><%= @minimum_password_length %> characters minimum</em>
-    <% end %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
-    <%= f.password_field :current_password, autocomplete: "current-password" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Update" %>
-  </div>
-<% end %>
-
-<h3>Remove foodbank</h3>
-
-<p>You can clear your account from the app. Users will no longer see you in results.</p>
-
-<%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %>
+</div>
